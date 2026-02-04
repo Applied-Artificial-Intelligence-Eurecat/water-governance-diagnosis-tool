@@ -1,0 +1,134 @@
+<ng-container *transloco="let t">
+  <div class="language-selector">
+    <div class="btn-group" role="group" aria-label="Language selector">
+      <button type="button" class="btn" [class.btn-primary]="activeLang === 'en'" [class.btn-outline-primary]="activeLang !== 'en'" (click)="switchLanguage('en')">English</button>
+      <button type="button" class="btn" [class.btn-primary]="activeLang === 'es'" [class.btn-outline-primary]="activeLang !== 'es'" (click)="switchLanguage('es')">Español</button>
+      <button type="button" class="btn" [class.btn-primary]="activeLang === 'it'" [class.btn-outline-primary]="activeLang !== 'it'" (click)="switchLanguage('it')">Italiano</button>
+      <button type="button" class="btn" [class.btn-primary]="activeLang === 'fr'" [class.btn-outline-primary]="activeLang !== 'fr'" (click)="switchLanguage('fr')">Français</button>
+      <button type="button" class="btn" [class.btn-primary]="activeLang === 'hu'" [class.btn-outline-primary]="activeLang !== 'hu'" (click)="switchLanguage('hu')">Magyar</button>
+      <button type="button" class="btn" [class.btn-primary]="activeLang === 'ca'" [class.btn-outline-primary]="activeLang !== 'ca'" (click)="switchLanguage('ca')">Català</button>
+    </div>
+  </div>
+  <header class="first d-flex justify-content-center align-items-center text-center fs-1">
+    <h1>
+      {{ t('welcome1') }}<br />
+      {{ t('welcome2') }}<br />
+      {{ t('welcome3') }}
+    </h1>
+  </header>
+  <header class="second justify-content-center text-center fs-4">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <p class="mt-4">
+            {{ t('tool_description') }}
+          </p>
+        </div>
+      </div>
+      <div class="row justify-content-center fs-5 mt-4 pb-4">
+        <div class="col-md-2">
+          <img src="trends.png">
+          <p>{{ t('megatrends_resilience') }}</p>
+        </div>
+        <div class="col-md-2">
+          <img src="policy.png">
+          <p>{{ t('policy_institutions_regulation') }}</p>
+        </div>
+        <div class="col-md-2">
+          <img src="financing.png">
+          <p>{{ t('financing') }}</p>
+        </div>
+        <div class="col-md-2">
+          <img src="data.png">
+          <p>{{ t('data_monitoring_evaluation') }}</p>
+        </div>
+        <div class="col-md-2">
+          <img src="engagement.png">
+          <p>{{ t('engagement_accountability') }}</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <header class="third container text-center mb-5">
+    <div class="row my-5">
+      <div class="col">
+        <img src="drop.jpg">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4 class="fw-bold mb-4">
+          {{ t('intro_header') }}
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>
+          {{ t('intro_paragraph1') }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>
+          {{ t('intro_paragraph2') }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>
+          {{ t('intro_paragraph3') }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4 class="fw-bold mb-4">
+          {{ t('tool_header') }}
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>
+          {{ t('tool_text1') }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>
+          {{ t('tool_text2') }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h4 class="fw-bold mb-4">
+          {{ t('use_header') }}
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>
+          {{ t('tool_text1') }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>
+          {{ t('tool_text2') }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-primary" [routerLink]="['/', 'form']" [queryParams]="{lang: activeLang}">{{ t('start') }}</button>
+      </div>
+    </div>
+  </header>
+</ng-container>

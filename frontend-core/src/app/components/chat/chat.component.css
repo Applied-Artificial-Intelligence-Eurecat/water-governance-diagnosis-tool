@@ -1,0 +1,190 @@
+.chat-container {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 350px;
+  height: 450px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  transform: translateY(100vh);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+h3 {
+  color: #f4f4f4;
+}
+
+.chat-container.open {
+  transform: translateY(0);
+}
+
+.chat-header {
+  background-color: rgba(86, 170, 168, 1);
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px;
+  border-radius: 10px;
+  word-break: break-word;
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: rgba(86, 170, 168, 1);
+  color: white;
+}
+
+.system-message {
+  align-self: flex-start;
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.message-content p {
+  margin: 0 0 5px 0;
+}
+
+.message-time {
+  display: block;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  text-align: right;
+}
+
+/* Styles for the "More info" expander */
+.more-info {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.more-info-toggle {
+  background: none;
+  border: none;
+  color: rgba(86, 170, 168, 1);
+  padding: 5px 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.more-info-toggle:hover {
+  text-decoration: underline;
+}
+
+.more-info-content {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  border-left: 3px solid rgba(86, 170, 168, 0.7);
+}
+
+.more-info-content p {
+  margin-bottom: 10px;
+}
+
+.more-info-content p:last-child {
+  margin-bottom: 0;
+}
+
+.chat-input {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid #eee;
+}
+
+.chat-input input {
+  flex: 1;
+}
+
+.send-button {
+  padding: 5px 15px;
+}
+
+/* Loading indicator styles */
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+  align-self: center;
+}
+
+.loading-indicator p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 123, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #007bff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-primary {
+  --bs-btn-bg: rgb(89, 198, 138);
+  --bs-btn-border-color: rgb(89, 198, 138);
+  --bs-btn-hover-bg: rgb(79, 178, 128);
+  --bs-btn-hover-border-color: rgb(79, 178, 128);
+  --bs-btn-active-bg: rgb(79, 178, 128);
+  --bs-btn-active-border-color: rgb(79, 178, 128);
+  --bs-btn-active-color: rgb(255, 255, 255);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .chat-container {
+    width: 90%;
+    right: 5%;
+    bottom: 70px;
+  }
+}

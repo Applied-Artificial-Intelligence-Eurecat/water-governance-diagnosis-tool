@@ -1,0 +1,57 @@
+section header {
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(rgba(86, 170, 168, 1) 0%, rgba(133, 183, 90, 1) 100%);
+}
+
+section header img {
+    filter: brightness(0) invert(1);
+    width: 50px;
+}
+
+form .question-header p,
+form .question-title,
+form label.radio-label,
+form label.form-check-label,
+form .col-form-label {
+    font-size: 18px;
+}
+
+li.question-statement {
+    font-size: 18px;
+    margin: 0 0 2rem -1rem;
+}
+
+form .container-fluid {
+    background-color: whitesmoke;
+    padding: 1em 0;
+}
+
+h5 {
+    font-weight: bold;
+    padding: 2em 0 1em;
+}
+
+select2 {
+    --select2-option-highlighted-background: #0BA289;
+    --select2-selection-multiple-padding: 0;
+    --select2-multiple-height: 24px;
+    --select2-selection-border-color: var(--bs-border-color);
+    --select2-selection-border-radius: var(--bs-border-radius);
+}
+
+:host::ng-deep .select2-container--default {
+    margin-bottom: .5rem !important;
+}
+
+:host::ng-deep .select2-container--default .select2-selection--multiple {
+    padding: .375rem .75rem;
+}
+
+:host::ng-deep .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    min-height: 1.5em !important;
+}
+
+:host::ng-deep .select2-container--default .select2-selection--multiple .select2-selection__placeholder {
+    margin-top: 0 !important;
+}

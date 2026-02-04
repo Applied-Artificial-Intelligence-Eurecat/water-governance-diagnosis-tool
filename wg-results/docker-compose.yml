@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  innwater-tool-streamlit:
+    build: .
+    container_name: innwater-tool-streamlit
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    hostname: innwater-tool-streamlit
+    networks:
+      - proxy-network
+      - iot_network
+    volumes:
+      - ./:/app
+    env_file: .env
+
+networks:
+  proxy-network:
+    external: true
+  iot_network:
+    external: true

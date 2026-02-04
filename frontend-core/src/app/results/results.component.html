@@ -1,0 +1,19 @@
+<div class="container-fluid" *transloco="let t">
+  <div class="row text-center">
+    <div class="col">
+      <h1 class="fw-bold">
+        {{t('results.title')}}
+      </h1>
+    </div>
+  </div>
+  <div class="row text-center g-0" style="height: 90vh;"> <!-- Make row take full height -->
+    <div class="col-xl-7 col-12" style="height: 100%;">
+      <canvas baseChart [data]="chartData" [options]="chartOptions" type="radar" [legend]="false"> </canvas>
+    </div>
+    <div class="col-xl-5 col-12" style="height: 100%;"> <!-- Ensure the column takes full height -->
+      <iframe [src]="getAssistantIFrame()"
+        width="500" height="100%" style="border: none; display: block; width: 100%; height: 100%;">
+      </iframe>
+    </div>
+  </div>
+</div>

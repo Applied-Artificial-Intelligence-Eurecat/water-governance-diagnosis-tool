@@ -1,0 +1,208 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" *transloco="let t">
+  <div class="container-fluid p-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h3>
+            {{ t('register.title') }}
+          </h3>
+        </div>
+        <div class="col-md-8">
+          <div class="row gx-5 gy-3 mb-3">
+            <div class="col-md-4">
+              <label for="name" class="form-label">{{ t('register.name') }}</label>
+              <input class="form-control" id="name" formControlName="name" required>
+            </div>
+            <div class="col-md-4">
+              <label for="surname" class="form-label">{{ t('register.surname') }}</label>
+              <input class="form-control" id="surname" formControlName="surname" required>
+            </div>
+          </div>
+          <div class="row gx-5 gy-3 mb-3">
+            <div class="col-md-4">
+              <label for="role" class="form-label">{{ t('register.role') }}</label>
+              <select class="form-select" id="role" formControlName="role">
+                <option value="">{{ t('choose_option') }}</option>
+                <option value="role1">{{ t('register.role1') }}</option>
+                <option value="role2">{{ t('register.role2') }}</option>
+                <option value="role3">{{ t('register.role3') }}</option>
+                <option value="role4">{{ t('register.role4') }}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="company" class="form-label">{{ t('register.company') }}</label>
+              <input class="form-control" id="company" formControlName="company">
+            </div>
+            <div class="col-md-4">
+              <label for="pilotArea" class="form-label">{{ t('register.pilot_area') }}</label>
+              <select class="form-select" id="pilotArea" formControlName="pilotArea">
+                <option value="">{{ t('choose_option') }}</option>
+                <option value="pilot_area1">{{ t('register.pilot_area1') }}</option>
+                <option value="pilot_area2">{{ t('register.pilot_area2') }}</option>
+                <option value="pilot_area3">{{ t('register.pilot_area3') }}</option>
+                <option value="pilot_area4">{{ t('register.pilot_area4') }}</option>
+                <option value="pilot_area5">{{ t('register.pilot_area5') }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row gx-5 gy-3 mb-3">
+            <div class="col-md-4">
+              <label for="email" class="form-label">{{ t('register.email') }}*</label>
+              <input class="form-control" id="email" formControlName="email">
+              <div class="form-text">{{ t('register.email_not_shared') }}</div>
+            </div>
+            <div class="col-md-4">
+              <label for="password" class="form-label">{{ t('register.password') }}*</label>
+              <div class="password-input-wrapper">
+                <input type="password" class="form-control" id="password"
+                       formControlName="password">
+                <i [ngClass]="{'bi-eye-fill': !showPassword, 'bi-eye-slash-fill': showPassword}"
+                   (click)="togglePasswordVisibility()"></i>
+              </div>
+              <!-- Retrieve button that's only enabled when email and password are valid -->
+            </div>
+            <div class="col-md-4" style="padding-top: 2em;">
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                      data-bs-target="#retrieveConfirmationModal">
+                {{ t('register.retrieve') || 'Retrieve' }}
+              </button>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="privacyPolicy"
+                       formControlName="privacyPolicy">
+                <label class="form-check-label" for="privacyPolicy">
+                  {{ t('register.i_have_read_policy') }}*
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Submit error alert -->
+          <div class="row mb-3" *ngIf="mandatoryQuestionsUnanswered.length > 0">
+            <div class="col">
+              <div class="alert alert-danger" role="alert">
+                {{ t('register.mandatory_questions_unanswered', { question_ids: mandatoryQuestionsUnanswered.join(', ')}) }}
+              </div>
+            </div>
+          </div>
+          <!-- Save status alert -->
+          <div class="row mb-3" *ngIf="saveStatus">
+            <div class="col">
+              <div class="alert" [ngClass]="{'alert-success': saveStatus === 'success', 'alert-danger': saveStatus === 'error'}" role="alert">
+                <div *ngIf="saveStatus === 'success'">{{ t('register.save_success') || 'Questionnaire saved successfully!' }}</div>
+                <div *ngIf="saveStatus === 'error'">{{ t('register.save_error') || 'Error saving questionnaire. Please try again.' }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="row gy-3 justify-content-start">
+            <div class="col-auto">
+              <button class="btn btn-light" type="button" [disabled]="!registerForm.valid" (click)="onSave()">
+                {{ t('register.save') }}
+              </button>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid">
+                {{ t('register.submit') }}
+              </button>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-secondary" type="button" (click)="printQuestionnaire()">
+                {{ t('register.print_questionnaire') }}
+              </button>
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                      data-bs-target="#resetConfirmationModal">
+                {{ t('register.reset_questionnaire') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Reset confirmation modal -->
+<div class="modal fade" id="resetConfirmationModal" tabindex="-1" aria-labelledby="resetConfirmationModalLabel"
+     aria-hidden="true" *transloco="let t">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="resetConfirmationModalLabel">{{ t('register.reset_questionnaire') }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ t('register.are_you_sure') }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ t('register.no') }}</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="resetQuestionnaire.emit()">
+          {{ t('register.yes') }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Retrieve confirmation modal -->
+<div class="modal fade" id="retrieveConfirmationModal" #retrieveConfirmationModal
+     tabindex="-1" aria-labelledby="retrieveConfirmationModalLabel"
+     aria-hidden="true" *transloco="let t">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="retrieveConfirmationModalLabel">
+          {{ t('register.retrieve_questionnaire') || 'Retrieve Questionnaire' }}
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="!questionnaires.length">
+        <p> {{ t('register.no_questionnaires_found') || 'Retrieve' }}</p>
+        </div>
+
+        <div *ngIf="questionnaires.length > 0">
+          <p>{{ t('register.select_questionnaire') || 'Select a questionnaire to retrieve:' }}</p>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">{{ t('register.questionnaire_date') || 'Date' }}</th>
+                  <th scope="col">{{ t('register.action') || 'Action' }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let questionnaire of questionnaires; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ questionnaire.date }}</td>
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal"
+                              (click)="populateFormWithQuestionnaire(questionnaire)">
+                        {{ t('register.select') || 'Select' }}
+                      </button>
+                      <button type="button" class="btn btn-danger btn-sm ms-1"
+                              (click)="deleteQuestionnaire(i)">
+                        {{ t('register.delete') || 'Delete' }}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          {{ t('register.cancel') || 'Cancel' }}
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>

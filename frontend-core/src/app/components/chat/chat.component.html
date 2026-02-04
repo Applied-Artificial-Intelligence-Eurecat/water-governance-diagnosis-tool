@@ -1,0 +1,50 @@
+<div class="chat-container" [class.open]="isOpen" *transloco="let t">
+  <div class="chat-header">
+    <h3>{{ t('chat_support') || 'Chat Support' }}</h3>
+    <button class="close-button" (click)="closeChat()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <div class="chat-messages">
+    <div *ngFor="let message of messages; let i = index"
+         class="message"
+         [ngClass]="{'user-message': message.sender === 'user', 'system-message': message.sender === 'system'}">
+      <div class="message-content">
+        <p>{{ message.text }}</p>
+        <!-- Add expander for the welcome message (first system message) -->
+        <div *ngIf="i === 0 && message.sender === 'system'" class="more-info">
+          <button class="more-info-toggle" (click)="toggleMoreInfo()">
+            {{ showMoreInfo ? '▲ ' : '▼ ' }}{{ t('chat.more_info_label') }}
+          </button>
+          <div *ngIf="showMoreInfo" class="more-info-content">
+            <p><strong>{{ t('chat.more_info_content.what_i_can_do') }}</strong></p>
+            <p>{{ t('chat.more_info_content.what_i_can_do_text') }}</p>
+            <p><strong>{{ t('chat.more_info_content.keep_in_mind') }}</strong></p>
+            <p>{{ t('chat.more_info_content.keep_in_mind_text') }}</p>
+            <p><strong>{{ t('chat.more_info_content.privacy_note') }}</strong></p>
+            <p>{{ t('chat.more_info_content.privacy_note_text') }}</p>
+          </div>
+        </div>
+        <small class="message-time">{{ message.timestamp | date:'short' }}</small>
+      </div>
+    </div>
+    <div *ngIf="isLoading" class="loading-indicator">
+      <div class="loading-spinner"></div>
+      <p>{{ t('loading_message') || 'Loading...' }}</p>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      type="text"
+      [(ngModel)]="newMessage"
+      [placeholder]="t('type_message') || 'Type a message...'"
+      (keyup.enter)="sendMessage()"
+      class="form-control"
+    >
+    <button class="send-button btn btn-primary" (click)="sendMessage()">
+      <i class="bi bi-send"></i>
+    </button>
+  </div>
+</div>

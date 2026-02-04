@@ -1,0 +1,3100 @@
+<form [formGroup]="form" *transloco="let t">
+  <!-- Chat components -->
+  <app-chat-button></app-chat-button>
+  <app-chat></app-chat>
+  <!--PREPARATION PHASE-->
+  <section class="one">
+    <header class="container-fluid text-center fs-3">
+      <div class="row">
+        <div class="col">
+          <p class="mt-4">
+            {{ t('preparation_phase') }}
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!--QUESTION 1-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question1') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question1')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question1_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question1">
+          <h5>
+            {{ t('question1_table1') }}
+          </h5>
+          <ng-container formArrayName="table1">
+            <ng-container *ngFor="let row of question1Table1.controls; let index=index">
+              <div class="row gx-5 gy-1 mb-3" [formGroupName]="index">
+                <div class="col-md-3">
+                  <label [for]="'institutionName' + index" class="form-label">{{ t('institution_name', { number : index
+                    + 1 }) }}</label>
+                  <input class="form-control" [id]="'institutionName' + index" formControlName="institutionName"
+                    [placeholder]="t('name_placeholder')">
+                </div>
+                <div class="col-md-3">
+                  <label #labelToClick [for]="'role' + index" class="form-label">{{ t('role_nature') }}</label>
+                  <select2 [id]="'role' + index" [data]="institutionRoleOptions" [templates]="template" multiple
+                    displaySearchStatus="hidden" [placeholder]="t('choose_option')" formControlName="role"
+                    (ngModelChange)="onChange($event, row.get('role'))">
+                    <ng-template #template let-value="value">{{t(value)}}</ng-template>
+                  </select2>
+                </div>
+                <div class="col-md-3">
+                  <label [for]="'governanceLevel' + index" class="form-label">{{ t('governance_level') }}</label>
+                  <select2 [id]="'governanceLevel' + index" [data]="institutionGovernanceLevelOptions"
+                    [templates]="template" multiple displaySearchStatus="hidden" [placeholder]="t('choose_option')"
+                    formControlName="governanceLevel">
+                    <ng-template #template let-value="value">{{t(value)}}</ng-template>
+                  </select2>
+                </div>
+                <div *ngIf="index > 0" class="col-md-1 align-self-center">
+                  <button class="btn btn-sm btn-danger rounded-circle" type="button"
+                    (click)="deleteQuestion1Table1Institution(index)">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary rounded-circle" type="button" (click)="addQuestion1Table1Institution()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+          <h5>
+            {{ t('question1_table2') }}
+          </h5>
+          <ng-container formArrayName="table2">
+            <ng-container *ngFor="let row of question1Table2.controls; let index=index">
+              <div class="row gx-5 gy-1 mb-3" [formGroupName]="index">
+                <div class="col-md-3">
+                  <label [for]="'institutionName' + index" class="form-label">{{ t('institution_name', { number : index
+                    + 1 }) }}</label>
+                  <input class="form-control" [id]="'institutionName' + index" formControlName="institutionName"
+                    [placeholder]="t('name_placeholder')">
+                </div>
+                <div class="col-md-3">
+                  <label [for]="'role' + index" class="form-label">{{ t('role_nature') }}</label>
+                  <select2 [id]="'role' + index" [data]="institutionRoleOptions" [templates]="template" multiple
+                    displaySearchStatus="hidden" [placeholder]="t('choose_option')" formControlName="role"
+                    (ngModelChange)="onChange($event, row.get('role'))">
+                    <ng-template #template let-value="value">{{t(value)}}</ng-template>
+                  </select2>
+                </div>
+                <div class="col-md-3">
+                  <label [for]="'governanceLevel' + index" class="form-label">{{ t('governance_level') }}</label>
+                  <select2 [id]="'governanceLevel' + index" [data]="institutionGovernanceLevelOptions"
+                    [templates]="template" multiple displaySearchStatus="hidden" [placeholder]="t('choose_option')"
+                    formControlName="governanceLevel">
+                    <ng-template #template let-value="value">{{t(value)}}</ng-template>
+                  </select2>
+                </div>
+                <div *ngIf="index > 0" class="col-md-1 align-self-center">
+                  <button class="btn btn-sm btn-danger rounded-circle" type="button"
+                    (click)="deleteQuestion1Table2Institution(index)">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary rounded-circle" type="button" (click)="addQuestion1Table2Institution()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 1-->
+
+    <!--QUESTION 2-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question2') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question2')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question2_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formArrayName="question2">
+          <ng-container *ngFor="let row of question2Table.controls; let index=index">
+            <ng-container [formGroupName]="index">
+              <div class="row gx-5 gy-1 mb-3">
+                <div class="col-md-3">
+                  <div class="d-flex align-items-start">
+                    <label [for]="'rbo' + index" class="form-label">{{ t('rbo', { number : index + 1 }) }}</label>
+                    <button *ngIf="index > 0" class="btn btn-danger rounded-circle ms-2" type="button"
+                      style="--bs-btn-padding-y: 0rem; --bs-btn-padding-x: .30rem;"
+                      (click)="deleteQuestion2TableRbo(index)">
+                      <i class="bi bi-x"></i>
+                    </button>
+                  </div>
+                  <input class="form-control" [id]="'rbo' + index" formControlName="rbo"
+                    [placeholder]="t('name_placeholder')">
+                </div>
+                <div class="col-md-3">
+                  <label [for]="'subnational' + index" class="form-label">{{ t('subnational') }}</label>
+                  <select [id]="'subnational' + index" class="form-select" formControlName="subnational">
+                    <option value="">{{ t('choose_option') }}</option>
+                    <option value="regional">{{ t('regional') }}</option>
+                    <option value="provincial">{{ t('provincial') }}</option>
+                    <option value="local">{{ t('local') }}</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label [for]="'role' + index" class="form-label">{{ t('role') }}</label>
+                  <select2 [id]="'role' + index" [data]="rboRoleOptions" [templates]="template" multiple
+                    displaySearchStatus="hidden" [placeholder]="t('choose_option')" formControlName="role"
+                    (ngModelChange)="onChange($event, row.get('role'))">
+                    <ng-template #template let-value="value">{{t(value)}}</ng-template>
+                  </select2>
+                  <label [for]="'roleInfo' + index" class="form-label">{{ t('add_information') }}</label>
+                  <textarea [id]="'roleInfo' + index" class="form-control" formControlName="roleInfo"></textarea>
+                </div>
+                <div class="col-md-3">
+                  <label [for]="'functions' + index" class="form-label">{{ t('functions') }}</label>
+                  <select [id]="'functions' + index" class="form-select mb-2" formControlName="functions">
+                    <option value="">{{ t('choose_option') }}</option>
+                    <option value="planning">{{ t('planning') }}</option>
+                    <option value="water_management">{{ t('water_management') }}</option>
+                    <option value="monitoring">{{ t('monitoring') }}</option>
+                    <option value="executive">{{ t('executive') }}</option>
+                  </select>
+                  <label [for]="'functionsInfo' + index" class="form-label">{{ t('add_information') }}</label>
+                  <textarea [id]="'functionsInfo' + index" class="form-control"
+                    formControlName="functionsInfo"></textarea>
+                </div>
+              </div>
+              <ng-container formGroupName="radios">
+                <div class="row">
+                  <label class="radio-label form-label col-md-2">{{ t('adequate_staffing') }}</label>
+                  <div class="col-md-10">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="adequateStaffing"
+                        [id]="'adequateStaffing1' + index" value="yes">
+                      <label class="form-check-label" [for]="'adequateStaffing1' + index">{{ t('yes') }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="adequateStaffing"
+                        [id]="'adequateStaffing2' + index" value="no">
+                      <label class="form-check-label" [for]="'adequateStaffing2' + index">{{ t('no') }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="adequateStaffing"
+                        [id]="'adequateStaffing3' + index" value="idk">
+                      <label class="form-check-label" [for]="'adequateStaffing3' + index">{{ t('idk') }}</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="radio-label form-label col-md-2">{{ t('adequate_budget') }}</label>
+                  <div class="col-md-10">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="adequateBudget"
+                        [id]="'adequateBudget1' + index" value="yes">
+                      <label class="form-check-label" [for]="'adequateBudget1' + index">{{ t('yes') }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="adequateBudget"
+                        [id]="'adequateBudget2' + index" value="no">
+                      <label class="form-check-label" [for]="'adequateBudget2' + index">{{ t('no') }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" formControlName="adequateBudget"
+                        [id]="'adequateBudget3' + index" value="idk">
+                      <label class="form-check-label" [for]="'adequateBudget3' + index">{{ t('idk') }}</label>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary rounded-circle" type="button" (click)="addQuestion2TableRbo()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 2-->
+
+    <!--QUESTION 3-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question3') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question3')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question3_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question3">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('financing_mechanisms') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <div class="row">
+              <label class="radio-label form-label col-md-4">{{ t('financing1') }}</label>
+              <div class="col-md-6">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="financing1" id="financing1_1"
+                    value="yes">
+                  <label class="form-check-label" for="financing1_1">{{ t('yes') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="financing1" id="financing1_2"
+                    value="no">
+                  <label class="form-check-label" for="financing1_2">{{ t('no') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="financing1" id="financing1_3"
+                    value="idk">
+                  <label class="form-check-label" for="financing1_3">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label class="radio-label form-label col-md-4">{{ t('financing2') }}</label>
+              <div class="col-md-6">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="financing2" id="financing2_1"
+                    value="yes">
+                  <label class="form-check-label" for="financing2_1">{{ t('yes') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="financing2" id="financing2_2"
+                    value="no">
+                  <label class="form-check-label" for="financing2_2">{{ t('no') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="financing2" id="financing2_3"
+                    value="idk">
+                  <label class="form-check-label" for="financing2_3">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label class="radio-label form-label col-md-4">{{ t('financing3') }}</label>
+              <div class="col-md-6">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="financing3" id="financing3_1"
+                    value="yes">
+                  <label class="form-check-label" for="financing3_1">{{ t('yes') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="financing3" id="financing3_2"
+                    value="no">
+                  <label class="form-check-label" for="financing3_2">{{ t('no') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="financing3" id="financing3_3"
+                    value="idk">
+                  <label class="form-check-label" for="financing3_3">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container formArrayName="financing4">
+            <ng-container *ngFor="let row of question3OtherFinancingMechanisms.controls; let index=index">
+              <div class="row gy-1 mb-3">
+                <label [for]="'financing4' + index" class="col-md-4 col-form-label">{{
+                  t('other_please_specify_numbered', { number : index + 1 }) }}</label>
+                <div class="col-md-3">
+                  <input class="form-control" [id]="'financing4' + index" [formControlName]="index">
+                </div>
+                <div *ngIf="index > 0" class="col-md-1 align-self-center">
+                  <button class="btn btn-sm btn-danger rounded-circle" type="button"
+                    (click)="deleteQuestion3OtherFinancingMechanism(index)">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary rounded-circle" type="button"
+              (click)="addQuestion3OtherFinancingMechanism()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 3-->
+
+    <!--QUESTION 4-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question4') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question4')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question4_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question4">
+          <ng-container formGroupName="radios">
+            <div class="row">
+              <label class="radio-label form-label col-md-5">{{ t('laws1') }}</label>
+              <div class="col-md-5">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="laws1" id="laws1_1" value="yes">
+                  <label class="form-check-label" for="laws1_1">{{ t('yes') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="laws1" id="laws1_2" value="no">
+                  <label class="form-check-label" for="laws1_2">{{ t('no') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="laws1" id="laws1_3" value="idk">
+                  <label class="form-check-label" for="laws1_3">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label class="radio-label form-label col-md-5">{{ t('laws2') }}</label>
+              <div class="col-md-5">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="laws2" id="laws2_1" value="yes">
+                  <label class="form-check-label" for="laws2_1">{{ t('yes') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="laws2" id="laws2_2" value="no">
+                  <label class="form-check-label" for="laws2_2">{{ t('no') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="laws2" id="laws2_3" value="idk">
+                  <label class="form-check-label" for="laws2_3">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 4-->
+
+    <!--QUESTION 5-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question5') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question5')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question5_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question5">
+          <ng-container formGroupName="radios">
+            <div class="row">
+              <label class="radio-label form-label col-md-5">{{ t('policy1') }}</label>
+              <div class="col-md-5">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="policy1" id="policy1_1" value="yes">
+                  <label class="form-check-label" for="policy1_1">{{ t('yes') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="policy1" id="policy1_2" value="no">
+                  <label class="form-check-label" for="policy1_2">{{ t('no') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="policy1" id="policy1_3" value="idk">
+                  <label class="form-check-label" for="policy1_3">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+            <ng-container *ngIf="form.get('question5.radios.policy1')?.value === 'yes'" formGroupName="policy1_followup">
+              <div class="row mt-2 ms-5">
+                <label class="radio-label form-label col-md-5">{{ t('policy1_implemented') }}</label>
+                <div class="col-md-5">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="implemented" id="policy1_implemented_1" value="yes">
+                    <label class="form-check-label" for="policy1_implemented_1">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="implemented" id="policy1_implemented_2" value="no">
+                    <label class="form-check-label" for="policy1_implemented_2">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="implemented" id="policy1_implemented_3" value="idk">
+                    <label class="form-check-label" for="policy1_implemented_3">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2 ms-5">
+                <label class="radio-label form-label col-md-5">{{ t('policy1_funded') }}</label>
+                <div class="col-md-5">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="funded" id="policy1_funded_1" value="yes">
+                    <label class="form-check-label" for="policy1_funded_1">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="funded" id="policy1_funded_2" value="no">
+                    <label class="form-check-label" for="policy1_funded_2">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="funded" id="policy1_funded_3" value="idk">
+                    <label class="form-check-label" for="policy1_funded_3">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2 ms-5">
+                <label class="radio-label form-label col-md-5">{{ t('policy1_monitored') }}</label>
+                <div class="col-md-5">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="monitored" id="policy1_monitored_1" value="yes">
+                    <label class="form-check-label" for="policy1_monitored_1">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="monitored" id="policy1_monitored_2" value="no">
+                    <label class="form-check-label" for="policy1_monitored_2">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="monitored" id="policy1_monitored_3" value="idk">
+                    <label class="form-check-label" for="policy1_monitored_3">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <div class="row">
+              <label class="radio-label form-label col-md-5">{{ t('policy2') }}</label>
+              <div class="col-md-5">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="policy2" id="policy2_1" value="yes">
+                  <label class="form-check-label" for="policy2_1">{{ t('yes') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="policy2" id="policy2_2" value="no">
+                  <label class="form-check-label" for="policy2_2">{{ t('no') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="policy2" id="policy2_3" value="idk">
+                  <label class="form-check-label" for="policy2_3">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+            <ng-container *ngIf="form.get('question5.radios.policy2')?.value === 'yes'" formGroupName="policy2_followup">
+              <div class="row mt-2 ms-5">
+                <label class="radio-label form-label col-md-5">{{ t('policy2_implemented') }}</label>
+                <div class="col-md-5">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="implemented" id="policy2_implemented_1" value="yes">
+                    <label class="form-check-label" for="policy2_implemented_1">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="implemented" id="policy2_implemented_2" value="no">
+                    <label class="form-check-label" for="policy2_implemented_2">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="implemented" id="policy2_implemented_3" value="idk">
+                    <label class="form-check-label" for="policy2_implemented_3">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2 ms-5">
+                <label class="radio-label form-label col-md-5">{{ t('policy2_funded') }}</label>
+                <div class="col-md-5">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="funded" id="policy2_funded_1" value="yes">
+                    <label class="form-check-label" for="policy2_funded_1">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="funded" id="policy2_funded_2" value="no">
+                    <label class="form-check-label" for="policy2_funded_2">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="funded" id="policy2_funded_3" value="idk">
+                    <label class="form-check-label" for="policy2_funded_3">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2 ms-5">
+                <label class="radio-label form-label col-md-5">{{ t('policy2_monitored') }}</label>
+                <div class="col-md-5">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="monitored" id="policy2_monitored_1" value="yes">
+                    <label class="form-check-label" for="policy2_monitored_1">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="monitored" id="policy2_monitored_2" value="no">
+                    <label class="form-check-label" for="policy2_monitored_2">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="monitored" id="policy2_monitored_3" value="idk">
+                    <label class="form-check-label" for="policy2_monitored_3">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 5-->
+
+    <!--QUESTION 6-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question6') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question6')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question6_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question6">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('channels_consumer_rights') }}
+            </div>
+          </div>
+          <ng-container formGroupName="checkboxes">
+            <ng-container *ngFor="let checkbox of question6Checkboxes.controls | keyvalue">
+              <ng-container [formGroupName]="checkbox.key">
+                <div class="row mb-3 align-items-center">
+                  <div class="col-md-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" formControlName="checkbox" [id]="checkbox.key"
+                        value="">
+                      <label class="form-check-label" [for]="checkbox.key">{{ t(checkbox.key) }}</label>
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label [for]="checkbox.key + 'Info'" class="col-form-label">{{ t('comments_details') }}</label>
+                      </div>
+                      <div class="col-md-9">
+                        <input [id]="checkbox.key + 'Info'" class="form-control" formControlName="info">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container formArrayName="channel6">
+            <ng-container *ngFor="let row of question6OtherChannels.controls; let index=index">
+              <div class="row gy-1 mb-3">
+                <label [for]="'channel6' + index" class="col-md-3 col-form-label">{{ t('other_please_specify_numbered',
+                  { number : index + 1 }) }}</label>
+                <div class="col-md-7">
+                  <input class="form-control" [id]="'channel6' + index" [formControlName]="index">
+                </div>
+                <div *ngIf="index > 0" class="col-md-1 align-self-center">
+                  <button class="btn btn-sm btn-danger rounded-circle" type="button"
+                    (click)="deleteQuestion6OtherChannel(index)">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary rounded-circle" type="button" (click)="addQuestion6OtherChannel()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 6-->
+
+    <!--QUESTION 7-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question7') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question7')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question7_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question7">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('economic_instruments') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question7Radios.controls | keyvalue">
+              <div class="row gx-5 gy-1 mb-3" [formGroupName]="radio.key">
+                <label class="radio-label form-label col-md-4 col-lg-3">{{ t(radio.key) }}</label>
+                <div class="col-md-5 col-lg-3">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                      value="yes">
+                    <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                      value="no">
+                    <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                      value="idk">
+                    <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                  </div>
+                </div>
+                <div class="col-md-5 col-lg-3">
+                  <input class="form-control" [placeholder]="t('institution_setting_them')"
+                    formControlName="institutionSetting">
+                </div>
+                <div class="col-md-5 col-lg-3">
+                  <input class="form-control" [placeholder]="t('institution_collecting_them')"
+                    formControlName="institutionCollecting">
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="row mb-3">
+            <label for="instrument10" class="col-md-3 col-form-label">{{ t('other_please_specify') }}</label>
+            <div class="col-md-3">
+              <input class="form-control" id="instrument10" formControlName="instrument10">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 7-->
+  </section>
+  <!--END PREPARATION PHASE 1-->
+
+  <!--SECTION 1-->
+  <section class="one">
+    <header class="container-fluid text-center fs-3">
+      <div class="row">
+        <div class="col">
+          <p class="mt-4">
+            {{ t('section1') }}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <img src="trends.png">
+          <p>{{ t('megatrends_resilience') }}</p>
+        </div>
+      </div>
+    </header>
+
+    <!--QUESTION 8-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question8') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question8')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question8_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question8">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('water_risk') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question8Radios.controls | keyvalue">
+              <div class="row">
+                <label class="radio-label form-label col-md-5">{{ t(radio.key) }}</label>
+                <div class="col-md-5">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_1'"
+                      value="yes">
+                    <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_2'"
+                      value="no">
+                    <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_3'"
+                      value="idk">
+                    <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 8-->
+
+    <!--QUESTION 9-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question9') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question9')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question9_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question9">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('response_recovery_strategy') }}
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio1" value="inplace">
+                <label class="form-check-label" for="radio1">{{ t('inplace') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="inplaceComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="inplaceComments" class="form-control" formControlName="inplaceComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio2" value="inprogress">
+                <label class="form-check-label" for="radio2">{{ t('inprogress') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="inprogressComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="inprogressComments" class="form-control" formControlName="inprogressComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio3" value="emerging">
+                <label class="form-check-label" for="radio3">{{ t('emerging') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="emergingComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="emergingComments" class="form-control" formControlName="emergingComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio4" value="notinplace">
+                <label class="form-check-label" for="radio4">{{ t('notinplace') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="notinplaceComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="notinplaceComments" class="form-control" formControlName="notinplaceComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio5" value="idk">
+                <label class="form-check-label" for="radio5">{{ t('idk') }}</label>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 9-->
+
+    <!--QUESTION 10-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question10') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question10')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question10_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question10">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('biodiversity_strategy') }}
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio1" value="inplace">
+                <label class="form-check-label" for="radio1">{{ t('inplace') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="inplaceComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="inplaceComments" class="form-control" formControlName="inplaceComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio2" value="inprogress">
+                <label class="form-check-label" for="radio2">{{ t('inprogress') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="inprogressComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="inprogressComments" class="form-control" formControlName="inprogressComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio3" value="emerging">
+                <label class="form-check-label" for="radio3">{{ t('emerging') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="emergingComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="emergingComments" class="form-control" formControlName="emergingComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio4" value="notinplace">
+                <label class="form-check-label" for="radio4">{{ t('notinplace') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="notinplaceComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="notinplaceComments" class="form-control" formControlName="notinplaceComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio5" value="idk">
+                <label class="form-check-label" for="radio5">{{ t('idk') }}</label>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 10-->
+
+    <!--QUESTION 11-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question11') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question11')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question11">
+          <ul>
+            <li class="question-statement">
+              {{ t('question11_part1_statement') }}
+            </li>
+            <ng-container formGroupName="part1">
+              <ng-container formGroupName="radios">
+                <ng-container *ngFor="let radio of question11Part1Radios.controls | keyvalue">
+                  <div class="row gx-5 gy-1 mb-3 align-items-center" [formGroupName]="radio.key">
+                    <label class="radio-label form-label col-md-5">{{ t(radio.key) }}</label>
+                    <div class="col-md-5">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                          value="yes">
+                        <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                          value="no">
+                        <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                          value="idk">
+                        <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <li class="question-statement">
+              {{ t('question11_part2_statement') }}
+            </li>
+            <ng-container formGroupName="part2">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('environmental_flows_regulations') }}
+                </div>
+              </div>
+              <ng-container formGroupName="radios">
+                <ng-container *ngFor="let radio of question11Part2Radios.controls | keyvalue">
+                  <div class="row gx-5 gy-1 mb-3 align-items-center" [formGroupName]="radio.key">
+                    <label class="radio-label form-label col-md-5">{{ t(radio.key) }}</label>
+                    <div class="col-md-5">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                          value="yes">
+                        <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                          value="no">
+                        <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                          value="idk">
+                        <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 11-->
+
+    <!--QUESTION 12-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question12') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question12')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question12_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question12">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('initiatives_policies') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question12Radios.controls | keyvalue">
+              <div class="row gx-5 gy-1 mb-3 align-items-center" [formGroupName]="radio.key">
+                <label class="radio-label form-label col-md-5">{{ t(radio.key) }}</label>
+                <div class="col-md-5">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                      value="yes">
+                    <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                      value="no">
+                    <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                      value="idk">
+                    <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 12-->
+  </section>
+  <!--END SECTION 1-->
+
+  <!--SECTION 2-->
+  <section>
+    <header class="container-fluid text-center fs-3">
+      <div class="row">
+        <div class="col">
+          <p class="mt-4">
+            {{ t('section2') }}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <img src="policy.png">
+          <p>{{ t('policy_institutions_regulation') }}</p>
+        </div>
+      </div>
+    </header>
+
+    <!--QUESTION 13-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question13') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question13')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question13_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question13">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('obstacles') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question13Radios.controls | keyvalue">
+              <div class="row mb-3">
+                <label class="radio-label form-label col-md-6">{{ t(radio.key) }}</label>
+                <div class="col-md-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_1'"
+                      value="impact_little">
+                    <label class="form-check-label" [for]="radio.key + '_1'">{{ t('impact_little') }}</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_2'"
+                      value="impact_average">
+                    <label class="form-check-label" [for]="radio.key + '_2'">{{ t('impact_average') }}</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_3'"
+                      value="impact_important">
+                    <label class="form-check-label" [for]="radio.key + '_3'">{{ t('impact_important') }}</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_4'"
+                      value="idk">
+                    <label class="form-check-label" [for]="radio.key + '_4'">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <ng-container formArrayName="obstacle10">
+            <ng-container *ngFor="let row of question13OtherObstacles.controls; let index=index">
+              <div class="row gy-1 mb-3">
+                <label [for]="'obstacle10' + index" class="col-md-6 col-form-label">{{
+                  t('other_please_specify_numbered',
+                  { number : index + 1 }) }}</label>
+                <div class="col-md-4">
+                  <input class="form-control" [id]="'obstacle10' + index" [formControlName]="index">
+                </div>
+                <div *ngIf="index > 0" class="col-md-1 align-self-center">
+                  <button class="btn btn-sm btn-danger rounded-circle" type="button"
+                    (click)="deleteQuestion13OtherObstacle(index)">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary rounded-circle" type="button" (click)="addQuestion13OtherObstacle()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 13-->
+
+    <!--QUESTION 33 EXCEL -->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question33_excel') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question33_excel')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question33_excel_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question33_excel">
+          <ng-container formGroupName="radios">
+            <div class="row">
+              <label class="radio-label form-label col-md-5">{{ t('support_solidarity') }}</label>
+              <div class="col-md-5">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="support1" id="support1_1" value="yes">
+                  <label class="form-check-label" for="support1_1">{{ t('yes') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="support1" id="support1_2" value="no">
+                  <label class="form-check-label" for="support1_2">{{ t('no') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="support1" id="support1_3" value="idk">
+                  <label class="form-check-label" for="support1_3">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label class="radio-label form-label col-md-5">{{ t('priority_allocation') }}</label>
+              <div class="col-md-5">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="priority1" id="priority1_1" value="yes">
+                  <label class="form-check-label" for="priority1_1">{{ t('yes') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="priority1" id="priority1_2" value="no">
+                  <label class="form-check-label" for="priority1_2">{{ t('no') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="priority1" id="priority1_3" value="idk">
+                  <label class="form-check-label" for="priority1_3">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 33 EXCEL-->
+
+    <!--QUESTION 14-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question14') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question14')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question14_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question14">
+          <ng-container formGroupName="directives">
+            <ng-container *ngFor="let directive of question14Directives.controls | keyvalue">
+              <div class="row mb-3 align-items-end" [formGroupName]="directive.key">
+                <label class="radio-label form-label col-md-3">{{ t(directive.key) }}</label>
+                <div class="col-md-4">
+                  <label [for]="directive.key + 'Institutions'" class="form-label">{{t('institutions')}}</label>
+                  <input class="form-control" formControlName="institutions" [id]="directive.key + 'Institutions'">
+                </div>
+                <div class="col-md-5">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" formControlName="toBeInPlace"
+                      [id]="directive.key + '_1'"
+                      (change)="exclusiveCheckboxChanged($event, directive.value, 'inPlace')">
+                    <label class="form-check-label" [for]="directive.key + '_1'">{{ t('institutions_planned_in_place')
+                      }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" formControlName="inPlace"
+                      [id]="directive.key + '_2'"
+                      (change)="exclusiveCheckboxChanged($event, directive.value, 'toBeInPlace')">
+                    <label class="form-check-label" [for]="directive.key + '_2'">{{ t('institutions_in_place')
+                      }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="row mt-5 mb-3">
+            <label for="directive10" class="col-md-3 col-form-label">{{ t('other_please_specify') }}</label>
+            <div class="col-md-4">
+              <input class="form-control" id="directive10" formControlName="other">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 14-->
+
+    <!--QUESTION 15-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question15') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question15')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question15_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question15">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('capacity_gaps') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question15Radios.controls | keyvalue">
+              <div class="row gy-2 mb-3 align-items-end" [formGroupName]="radio.key">
+                <div class="col-md-7">
+                  <div class="row">
+                    <label class="radio-label form-label col-md-7">{{ t(radio.key) }}</label>
+                    <div class="col-md-5">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                          value="yes">
+                        <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                          value="no">
+                        <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                          value="idk">
+                        <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <label [for]="radio.key + 'Description'" class="form-label">{{ t('please_briefly_describe') }}</label>
+                  <input [id]="radio.key + 'Description'" class="form-control" formControlName="description">
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <ng-container formArrayName="other">
+            <ng-container *ngFor="let row of question15Other.controls; let index=index">
+              <div class="row gy-1 mt-5 mb-3">
+                <label [for]="'capacityGapOther' + index" class="col-md-4 col-form-label">{{
+                  t('other_please_specify_numbered',
+                  { number : index + 1 }) }}</label>
+                <div class="col-md-4">
+                  <input class="form-control" [id]="'capacityGapOther' + index" [formControlName]="index">
+                </div>
+                <div *ngIf="index > 0" class="col-md-1 align-self-center">
+                  <button class="btn btn-sm btn-danger rounded-circle" type="button"
+                    (click)="deleteQuestion15Other(index)">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary rounded-circle" type="button" (click)="addQuestion15Other()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 15-->
+
+    <!--QUESTION 16-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question16') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question16')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question16">
+          <ul>
+            <li class="question-statement">
+              {{ t('question16_part1_statement') }}
+            </li>
+            <ng-container formGroupName="part1">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('incentives') }}
+                </div>
+              </div>
+              <ng-container formGroupName="radios">
+                <ng-container *ngFor="let radio of question16Radios.controls | keyvalue">
+                  <div class="row mb-3 mb-md-0">
+                    <label class="radio-label form-label col-md-7">{{ t(radio.key) }}</label>
+                    <div class="col-md-5">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" [formControlName]="radio.key"
+                          [id]="radio.key + '_1'" value="yes">
+                        <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" [formControlName]="radio.key"
+                          [id]="radio.key + '_2'" value="no">
+                        <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" [formControlName]="radio.key"
+                          [id]="radio.key + '_3'" value="idk">
+                        <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+              <ng-container formArrayName="other">
+                <ng-container *ngFor="let row of question16Other.controls; let index=index">
+                  <div class="row gy-1 mb-3">
+                    <label [for]="'incentiveOther' + index" class="col-md-7 col-form-label">{{
+                      t('other_please_specify_numbered',
+                      { number : index + 1 }) }}</label>
+                    <div class="col-md-4">
+                      <input class="form-control" [id]="'incentiveOther' + index" [formControlName]="index">
+                    </div>
+                    <div *ngIf="index > 0" class="col-md-1 align-self-center">
+                      <button class="btn btn-sm btn-danger rounded-circle" type="button"
+                        (click)="deleteQuestion16Other(index)">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-primary rounded-circle" type="button" (click)="addQuestion16Other()">
+                  <i class="bi bi-plus-lg"></i>
+                </button>
+              </div>
+            </ng-container>
+            <li class="question-statement mt-4">
+              {{ t('question16_part2_statement') }}
+            </li>
+            <div class="row mb-3">
+              <label class="radio-label form-label col-md-4">{{ t('diversity_and_inclusion') }}</label>
+              <div class="col-md-8">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="part2" id="part2_1"
+                    value="to_a_large_extent">
+                  <label class="form-check-label" for="part2_1">{{ t('to_a_large_extent') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="part2" id="part2_2"
+                    value="to_some_extent">
+                  <label class="form-check-label" for="part2_2">{{ t('to_some_extent') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="part2" id="part2_3" value="not_at_all">
+                  <label class="form-check-label" for="part2_3">{{ t('not_at_all') }}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" formControlName="part2" id="part2_4" value="idk">
+                  <label class="form-check-label" for="part2_4">{{ t('idk') }}</label>
+                </div>
+              </div>
+            </div>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 16-->
+  </section>
+  <!--END SECTION 2-->
+
+  <!--SECTION 3-->
+  <section>
+    <header class="container-fluid text-center fs-3">
+      <div class="row">
+        <div class="col">
+          <p class="mt-4">
+            {{ t('section3') }}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <img src="financing.png">
+          <p>{{ t('financing') }}</p>
+        </div>
+      </div>
+    </header>
+
+    <!--QUESTION 17-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question17') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question17')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p [innerHTML]="t('question17_statement')"></p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question17">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('financial_sources') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question17Radios.controls | keyvalue">
+              <div class="row gy-2 mb-3 align-items-end" [formGroupName]="radio.key">
+                <div class="col-md-7">
+                  <div class="row">
+                    <label class="radio-label form-label col-md-7">{{ t(radio.key) }}</label>
+                    <div class="col-md-5">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                          value="yes">
+                        <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                          value="no">
+                        <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                          value="idk">
+                        <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <label [for]="radio.key + 'Description'" class="form-label">{{ t('financial_sources_details')
+                    }}</label>
+                  <input [id]="radio.key + 'Description'" class="form-control" formControlName="description">
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="row mt-5 mb-3">
+            <label for="financialSourceOther" class="col-md-4 col-form-label">{{ t('other_please_specify') }}</label>
+            <div class="col-md-4">
+              <input class="form-control" id="financialSourceOther" formControlName="other">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 17-->
+
+    <!--QUESTION 18-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question18') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question18')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question18_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question18">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('social_tariffs') }}
+            </div>
+          </div>
+          <ng-container formGroupName="vulnerables">
+            <ng-container *ngFor="let vulnerable of question18Vulnerables.controls | keyvalue">
+              <div class="row mb-3 align-items-end" [formGroupName]="vulnerable.key">
+                <div class="col-md-6">
+                  <div class="row">
+                    <label class="radio-label form-label col-md-4">{{ t(vulnerable.key) }}</label>
+                    <div class="col-md-8">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="urbanAreas"
+                          [id]="vulnerable.key + '_1'">
+                        <label class="form-check-label" [for]="vulnerable.key + '_1'">{{ t('urban_areas') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="ruralAreas"
+                          [id]="vulnerable.key + '_2'">
+                        <label class="form-check-label" [for]="vulnerable.key + '_2'">{{ t('rural_areas') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="idk"
+                          [id]="vulnerable.key + '_3'">
+                        <label class="form-check-label" [for]="vulnerable.key + '_3'">{{ t('idk') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <label [for]="vulnerable.key + 'Comments'" class="form-label">{{t('comments_descriptions')}}</label>
+                  <input class="form-control" formControlName="comments" [id]="vulnerable.key + 'Comments'">
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <ng-container formArrayName="other">
+            <ng-container *ngFor="let row of question18Other.controls; let index=index">
+              <div class="row gy-1 mt-5 mb-3">
+                <label [for]="'vulnerableOther' + index" class="col-md-6 col-form-label">{{
+                  t('other_please_specify_numbered',
+                  { number : index + 1 }) }}</label>
+                <div class="col-md-4">
+                  <input class="form-control" [id]="'vulnerableOther' + index" [formControlName]="index">
+                </div>
+                <div *ngIf="index > 0" class="col-md-1 align-self-center">
+                  <button class="btn btn-sm btn-danger rounded-circle" type="button"
+                    (click)="deleteQuestion18Other(index)">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary rounded-circle" type="button" (click)="addQuestion18Other()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 18-->
+
+    <!--QUESTION 19-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question19') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question19')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question19_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question19">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('financial_sources_ecosystems') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question19Radios.controls | keyvalue">
+              <div class="row gy-2 mb-3 align-items-end" [formGroupName]="radio.key">
+                <div class="col-md-7">
+                  <div class="row">
+                    <label class="radio-label form-label col-md-7">{{ t(radio.key) }}</label>
+                    <div class="col-md-5">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                          value="yes">
+                        <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                          value="no">
+                        <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                          value="idk">
+                        <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <label [for]="radio.key + 'Description'" class="form-label">{{ t('financial_sources_details')
+                    }}</label>
+                  <input [id]="radio.key + 'Description'" class="form-control" formControlName="description">
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="row mt-5 mb-3">
+            <label for="financialSourceEcosystemsOther" class="col-md-4 col-form-label">{{ t('other_please_specify')
+              }}</label>
+            <div class="col-md-4">
+              <input class="form-control" id="financialSourceEcosystemsOther" formControlName="other">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 19-->
+
+    <!--QUESTION 20-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question20') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question20')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question20_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question20">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('incentives_innovative_financing') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question20Radios.controls | keyvalue">
+              <div class="row gy-2 mb-3 align-items-end" [formGroupName]="radio.key">
+                <div class="col-md-7">
+                  <div class="row">
+                    <label class="radio-label form-label col-md-7">{{ t(radio.key) }}</label>
+                    <div class="col-md-5">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                          value="yes">
+                        <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                          value="no">
+                        <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                          value="idk">
+                        <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <label [for]="radio.key + 'Examples'" class="form-label">{{ t('provide_examples') }}</label>
+                  <input [id]="radio.key + 'Examples'" class="form-control" formControlName="examples">
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="row mt-5 mb-3">
+            <label for="financialSourceEcosystemsOther" class="col-md-5 col-form-label">{{ t('other_please_specify')
+              }}</label>
+            <div class="col-md-5">
+              <input class="form-control" id="financialSourceEcosystemsOther" formControlName="other">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 20-->
+  </section>
+  <!--END SECTION 3-->
+
+  <!--SECTION 4-->
+  <section>
+    <header class="container-fluid text-center fs-3">
+      <div class="row">
+        <div class="col">
+          <p class="mt-4">
+            {{ t('section4') }}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <img src="data.png">
+          <p>{{ t('data_monitoring_evaluation') }}</p>
+        </div>
+      </div>
+    </header>
+
+    <!--QUESTION 21-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question21') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question21')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question21_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question21">
+          <ul>
+            <li class="question-statement">
+              {{ t('question21_statement_part1') }}
+            </li>
+            <ng-container formGroupName="part1">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('document_data') }}
+                </div>
+              </div>
+              <ng-container formGroupName="checkboxes">
+                <ng-container *ngFor="let checkbox of question21Part1Checkboxes.controls | keyvalue">
+                  <div class="row gy-1 mb-3 align-items-center" [formGroupName]="checkbox.key">
+                    <div class="col-md-6">
+                      <div class="row align-items-center">
+                        <label class="radio-label form-label col-md-11">{{ t(checkbox.key) }}</label>
+                        <div class="col-md-1">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="checkbox"
+                              [id]="checkbox.key">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <input class="form-control" [placeholder]="t('comments_descriptions')" formControlName="comments">
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <li class="question-statement">
+              {{ t('question21_statement_part2') }}
+            </li>
+            <ng-container formGroupName="part2">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('potential_gap_issue') }}
+                </div>
+              </div>
+              <ng-container formGroupName="radios">
+                <ng-container *ngFor="let radio of question21Part2Radios.controls | keyvalue">
+                  <div class="row mb-3" [formGroupName]="radio.key">
+                    <div class="col-md-7">
+                      <div class="row">
+                        <label class="radio-label form-label col-md-7">{{ t(radio.key) }}</label>
+                        <div class="col-md-5">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                              value="yes">
+                            <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                              value="no">
+                            <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                              value="idk">
+                            <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <input class="form-control" [placeholder]="t('comments_descriptions')" formControlName="comments">
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <li class="question-statement">
+              {{ t('question21_statement_part3') }}
+            </li>
+            <ng-container formGroupName="part3">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('characteristics_wss') }}
+                </div>
+              </div>
+              <ng-container formGroupName="radios">
+                <ng-container *ngFor="let radio of question21Part3Radios.controls | keyvalue">
+                  <div class="row mb-3" [formGroupName]="radio.key">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <label class="radio-label form-label col-md-6">{{ t(radio.key) }}</label>
+                        <div class="col-md-6">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                              value="yes">
+                            <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                              value="no">
+                            <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                              value="idk">
+                            <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <input class="form-control" [placeholder]="t('responsible_authority_actors')"
+                        formControlName="actors">
+                    </div>
+                    <div class="col-md-3">
+                      <input class="form-control" [placeholder]="t('comments_descriptions')" formControlName="comments">
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 21-->
+
+    <!--QUESTION 22-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question22') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question22')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question22_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question22">
+          <ul>
+            <li class="question-statement">
+              {{ t('question22_statement_part1') }}
+            </li>
+            <ng-container formGroupName="part1">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('document_data') }}
+                </div>
+              </div>
+              <ng-container formGroupName="checkboxes">
+                <ng-container *ngFor="let checkbox of question22Part1Checkboxes.controls | keyvalue">
+                  <div class="row gy-1 mb-3 align-items-center" [formGroupName]="checkbox.key">
+                    <div class="col-md-6">
+                      <div class="row align-items-center">
+                        <label class="radio-label form-label col-md-11">{{ t(checkbox.key) }}</label>
+                        <div class="col-md-1">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="checkbox"
+                              [id]="checkbox.key">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <input class="form-control" [placeholder]="t('comments_descriptions')" formControlName="comments">
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <li class="question-statement">
+              {{ t('question22_statement_part2') }}
+            </li>
+            <ng-container formGroupName="part2">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('potential_gap_issue') }}
+                </div>
+              </div>
+              <ng-container formGroupName="radios">
+                <ng-container *ngFor="let radio of question22Part2Radios.controls | keyvalue">
+                  <div class="row mb-3" [formGroupName]="radio.key">
+                    <div class="col-md-7">
+                      <div class="row">
+                        <label class="radio-label form-label col-md-7">{{ t(radio.key) }}</label>
+                        <div class="col-md-5">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                              value="yes">
+                            <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                              value="no">
+                            <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                              value="idk">
+                            <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <input class="form-control" [placeholder]="t('comments_descriptions')" formControlName="comments">
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <li class="question-statement">
+              {{ t('question22_statement_part3') }}
+            </li>
+            <ng-container formGroupName="part3">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('characteristics_iwrm') }}
+                </div>
+              </div>
+              <ng-container formGroupName="radios">
+                <ng-container *ngFor="let radio of question22Part3Radios.controls | keyvalue">
+                  <div class="row mb-3" [formGroupName]="radio.key">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <label class="radio-label form-label col-md-6">{{ t(radio.key) }}</label>
+                        <div class="col-md-6">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                              value="yes">
+                            <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                              value="no">
+                            <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                              value="idk">
+                            <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <input class="form-control" [placeholder]="t('responsible_authority_actors')"
+                        formControlName="actors">
+                    </div>
+                    <div class="col-md-3">
+                      <input class="form-control" [placeholder]="t('comments_descriptions')" formControlName="comments">
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 22-->
+
+    <!--QUESTION 23-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question23') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question23')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question23_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question23">
+          <ul>
+            <li class="question-statement">
+              {{ t('question23_statement_part1') }}
+            </li>
+            <ng-container formGroupName="part1">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('document_data') }}
+                </div>
+              </div>
+              <ng-container formGroupName="checkboxes">
+                <ng-container *ngFor="let checkbox of question23Part1Checkboxes.controls | keyvalue">
+                  <div class="row gy-1 mb-3 align-items-center" [formGroupName]="checkbox.key">
+                    <div class="col-md-6">
+                      <div class="row align-items-center">
+                        <label class="radio-label form-label col-md-11">{{ t(checkbox.key) }}</label>
+                        <div class="col-md-1">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="checkbox"
+                              [id]="checkbox.key">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <input class="form-control" [placeholder]="t('comments_descriptions')" formControlName="comments">
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <li class="question-statement">
+              {{ t('question23_statement_part2') }}
+            </li>
+            <ng-container formGroupName="part2">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('potential_gap_issue') }}
+                </div>
+              </div>
+              <ng-container formGroupName="radios">
+                <ng-container *ngFor="let radio of question23Part2Radios.controls | keyvalue">
+                  <div class="row mb-3" [formGroupName]="radio.key">
+                    <div class="col-md-7">
+                      <div class="row">
+                        <label class="radio-label form-label col-md-7">{{ t(radio.key) }}</label>
+                        <div class="col-md-5">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                              value="yes">
+                            <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                              value="no">
+                            <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                              value="idk">
+                            <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <input class="form-control" [placeholder]="t('comments_descriptions')" formControlName="comments">
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <li class="question-statement">
+              {{ t('question23_statement_part3') }}
+            </li>
+            <ng-container formGroupName="part3">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('characteristics_water_risk') }}
+                </div>
+              </div>
+              <ng-container formGroupName="radios">
+                <ng-container *ngFor="let radio of question23Part3Radios.controls | keyvalue">
+                  <div class="row mb-3" [formGroupName]="radio.key">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <label class="radio-label form-label col-md-6">{{ t(radio.key) }}</label>
+                        <div class="col-md-6">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                              value="yes">
+                            <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                              value="no">
+                            <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                              value="idk">
+                            <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <input class="form-control" [placeholder]="t('responsible_authority_actors')"
+                        formControlName="actors">
+                    </div>
+                    <div class="col-md-3">
+                      <input class="form-control" [placeholder]="t('comments_descriptions')" formControlName="comments">
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 23-->
+
+    <!--QUESTION 24-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question24') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question24')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question24_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question24">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('evaluation_mechanisms') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question24Radios.controls | keyvalue">
+              <div class="row mb-3">
+                <label class="radio-label form-label col-md-4">{{ t(radio.key) }}</label>
+                <div class="col-md-8">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_1'"
+                      value="yes_very_often">
+                    <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes_very_often') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_2'"
+                      value="yes_often">
+                    <label class="form-check-label" [for]="radio.key + '_2'">{{ t('yes_often') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_3'"
+                      value="yes_sometimes">
+                    <label class="form-check-label" [for]="radio.key + '_3'">{{ t('yes_sometimes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_4'"
+                      value="yes_very_rarely">
+                    <label class="form-check-label" [for]="radio.key + '_4'">{{ t('yes_very_rarely') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_5'"
+                      value="never">
+                    <label class="form-check-label" [for]="radio.key + '_5'">{{ t('never') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_6'"
+                      value="idk">
+                    <label class="form-check-label" [for]="radio.key + '_6'">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <ng-container formArrayName="other">
+            <ng-container *ngFor="let row of question24Other.controls; let index=index">
+              <div class="row gy-1 mb-3">
+                <label [for]="'incentiveOther' + index" class="col-md-4 col-form-label">{{
+                  t('other_please_specify_numbered',
+                  { number : index + 1 }) }}</label>
+                <div class="col-md-5">
+                  <input class="form-control" [id]="'incentiveOther' + index" [formControlName]="index">
+                </div>
+                <div *ngIf="index > 0" class="col-md-1 align-self-center">
+                  <button class="btn btn-sm btn-danger rounded-circle" type="button"
+                    (click)="deleteQuestion24Other(index)">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary rounded-circle" type="button" (click)="addQuestion24Other()">
+              <i class="bi bi-plus-lg"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 24-->
+
+
+    <!--QUESTION 55 EXCEL-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question55_excel') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question55_excel')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question55_excel_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question55_excel">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('digital_water_policy_monitoring') }}
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio1" value="inplace">
+                <label class="form-check-label" for="radio1">{{ t('advanced') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="advancedComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="advancedComments" class="form-control" formControlName="advancedComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio2" value="inprogress">
+                <label class="form-check-label" for="radio2">{{ t('inprogress') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="inprogressComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="inprogressComments" class="form-control" formControlName="inprogressComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio3" value="emerging">
+                <label class="form-check-label" for="radio3">{{ t('emerging') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="emergingComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="emergingComments" class="form-control" formControlName="emergingComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio4" value="notinplace">
+                <label class="form-check-label" for="radio4">{{ t('notinplace') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="notinplaceComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="notinplaceComments" class="form-control" formControlName="notinplaceComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio5" value="idk">
+                <label class="form-check-label" for="radio5">{{ t('idk') }}</label>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 55 EXCEL-->
+
+    <!--QUESTION 25-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question25') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question25')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question25_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question25">
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question25Radios.controls | keyvalue">
+              <div class="row mb-3 align-items-end" [formGroupName]="radio.key">
+                <div class="col-md-7">
+                  <div class="row">
+                    <label class="radio-label form-label col-md-7">{{ t(radio.key) }}</label>
+                    <div class="col-md-5">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_1'"
+                          value="yes">
+                        <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_2'"
+                          value="no">
+                        <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" formControlName="radio" [id]="radio.key + '_3'"
+                          value="idk">
+                        <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <label [for]="radio.key + 'Examples'" class="form-label">{{ t('provide_examples') }}</label>
+                  <input [id]="radio.key + 'Examples'" class="form-control" formControlName="examples">
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 25-->
+  </section>
+  <!--END SECTION 4-->
+
+  <!--SECTION 5-->
+  <section>
+    <header class="container-fluid text-center fs-3">
+      <div class="row">
+        <div class="col">
+          <p class="mt-4">
+            {{ t('section5') }}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <img src="engagement.png">
+          <p>{{ t('engagement_accountability') }}</p>
+        </div>
+      </div>
+    </header>
+
+    <!--QUESTION 26-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question26') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question26')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question26_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question26">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('female_presence') }}
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio1" value="advanced">
+                <label class="form-check-label" for="radio1">{{ t('advanced_presence') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="advancedComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="advancedComments" class="form-control" formControlName="advancedComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio2" value="inprogress">
+                <label class="form-check-label" for="radio2">{{ t('inprogress_presence') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="inprogressComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="inprogressComments" class="form-control" formControlName="inprogressComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio3" value="emerging">
+                <label class="form-check-label" for="radio3">{{ t('emerging_presence') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="emergingComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="emergingComments" class="form-control" formControlName="emergingComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio4" value="notinplace">
+                <label class="form-check-label" for="radio4">{{ t('notinplace_presence') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="notinplaceComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="notinplaceComments" class="form-control" formControlName="notinplaceComments">
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 26-->
+
+    <!--QUESTION 27-->
+    <div class="question-header container pt-5" *ngIf="false" >
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question27') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question27')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question27_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid" *ngIf="false">
+      <div class="container">
+        <ng-container formGroupName="question27">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('procedures_women_welfare') }}
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio1" value="advanced">
+                <label class="form-check-label" for="radio1">{{ t('advanced') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="advancedComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="advancedComments" class="form-control" formControlName="advancedComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio2" value="inprogress">
+                <label class="form-check-label" for="radio2">{{ t('inprogress') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="inprogressComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="inprogressComments" class="form-control" formControlName="inprogressComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio3" value="emerging">
+                <label class="form-check-label" for="radio3">{{ t('emerging') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="emergingComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="emergingComments" class="form-control" formControlName="emergingComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio4" value="notinplace">
+                <label class="form-check-label" for="radio4">{{ t('notinplace') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="notinplaceComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="notinplaceComments" class="form-control" formControlName="notinplaceComments">
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 27-->
+
+    <!--QUESTION 28-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question28') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question28')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question28_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question28">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('transparency_gaps') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question28Radios.controls | keyvalue">
+              <div class="row mb-3">
+                <label class="radio-label form-label col-md-3">{{ t(radio.key) }}</label>
+                <div class="col-md-9">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_1'"
+                      value="major_obstacle">
+                    <label class="form-check-label" [for]="radio.key + '_1'">{{ t('major_obstacle') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_2'"
+                      value="important_obstacle">
+                    <label class="form-check-label" [for]="radio.key + '_2'">{{ t('important_obstacle') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_3'"
+                      value="somewhat_obstacle">
+                    <label class="form-check-label" [for]="radio.key + '_3'">{{ t('somewhat_obstacle') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_4'"
+                      value="not_obstacle">
+                    <label class="form-check-label" [for]="radio.key + '_4'">{{ t('not_obstacle') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_5'"
+                      value="idk">
+                    <label class="form-check-label" [for]="radio.key + '_5'">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <div class="row mb-4">
+            <label for="transparencyObstacleOther" class="col-md-3 col-form-label">{{ t('other_please_specify')
+              }}</label>
+            <div class="col-md-7">
+              <input class="form-control" id="transparencyObstacleOther" formControlName="other">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 28-->
+
+    <!--QUESTION 29-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question29') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question29')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question29">
+          <ul>
+            <li [innerHTML]="t('question29_statement_part1')" class="question-statement"></li>
+            <ng-container formGroupName="part1">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('citizen_engagement_in_water_governance') }}
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio1" value="advanced">
+                    <label class="form-check-label" for="radio1">{{ t('advanced') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio2" value="inprogress">
+                    <label class="form-check-label" for="radio2">{{ t('inprogress') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio3" value="emerging">
+                    <label class="form-check-label" for="radio3">{{ t('emerging') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio4" value="notinplace">
+                    <label class="form-check-label" for="radio4">{{ t('notinplace') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio5" value="idk">
+                    <label class="form-check-label" for="radio5">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <li class="question-statement">
+              {{ t('question29_statement_part2') }}
+            </li>
+            <ng-container formGroupName="part2">
+              <div class="row question-title mb-4 fw-bold">
+                <div class="col">
+                  {{ t('engagement_of_NGOs') }}
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio1" value="advanced">
+                    <label class="form-check-label" for="radio1">{{ t('advanced') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio2" value="inprogress">
+                    <label class="form-check-label" for="radio2">{{ t('inprogress') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio3" value="emerging">
+                    <label class="form-check-label" for="radio3">{{ t('emerging') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio4" value="notinplace">
+                    <label class="form-check-label" for="radio4">{{ t('notinplace') }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3 align-items-center">
+                <div class="col-md-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="radio" id="radio5" value="idk">
+                    <label class="form-check-label" for="radio5">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 29-->
+
+    <!--QUESTION 30-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question30') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question30')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question30_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question30">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('female_participation_water_engagement') }}
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio1" value="advanced">
+                <label class="form-check-label" for="radio1">{{ t('advanced') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="advancedComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="advancedComments" class="form-control" formControlName="advancedComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio2" value="inprogress">
+                <label class="form-check-label" for="radio2">{{ t('inprogress') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="inprogressComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="inprogressComments" class="form-control" formControlName="inprogressComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio3" value="emerging">
+                <label class="form-check-label" for="radio3">{{ t('emerging') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="emergingComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="emergingComments" class="form-control" formControlName="emergingComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio4" value="notinplace">
+                <label class="form-check-label" for="radio4">{{ t('notinplace') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="notinplaceComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="notinplaceComments" class="form-control" formControlName="notinplaceComments">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-md-2">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="radio" id="radio5" value="idk">
+                <label class="form-check-label" for="radio5">{{ t('idk') }}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="idkComments" class="col-form-label">{{ t('comments_descriptions') }}</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="idkComments" class="form-control" formControlName="idkComments">
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 30-->
+
+    <!--QUESTION 31-->
+    <div class="question-header container pt-5">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3>
+          {{ t('question31') }}
+        </h3>
+        <button class="btn btn-outline-primary btn-sm" type="button" (click)="openChatWithQuestion('question31')" [title]="t('chat.help_with_question')">
+          <i class="bi bi-chat-dots"></i> {{ t('chat.help_with_question') }}
+        </button>
+      </div>
+      <p>
+        {{ t('question31_statement') }}
+      </p>
+    </div>
+    <div class="container-fluid">
+      <div class="container">
+        <ng-container formGroupName="question31">
+          <div class="row question-title mb-4 fw-bold">
+            <div class="col">
+              {{ t('horizontal_coordination_mechanisms') }}
+            </div>
+          </div>
+          <ng-container formGroupName="radios">
+            <ng-container *ngFor="let radio of question31Radios.controls | keyvalue">
+              <div class="row">
+                <label class="radio-label form-label col-md-8">{{ t(radio.key) }}</label>
+                <div class="col-md-4">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_1'"
+                      value="yes">
+                    <label class="form-check-label" [for]="radio.key + '_1'">{{ t('yes') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_2'"
+                      value="no">
+                    <label class="form-check-label" [for]="radio.key + '_2'">{{ t('no') }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [formControlName]="radio.key" [id]="radio.key + '_3'"
+                      value="idk">
+                    <label class="form-check-label" [for]="radio.key + '_3'">{{ t('idk') }}</label>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <!--END QUESTION 31-->
+  </section>
+  <!--END SECTION 5-->
+
+  <div class="pt-5"></div>
+  <app-register [questionnaireForm]="form" [mandatoryQuestions]="mandatoryQuestions" (resetQuestionnaire)="resetQuestionnaire()" (questionnaireRetrieved)="loadRetrievedQuestionnaire($event)"></app-register>
+</form>

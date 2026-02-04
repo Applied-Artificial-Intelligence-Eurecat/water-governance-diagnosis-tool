@@ -1,0 +1,25 @@
+.container-fluid {
+    color: white;
+    background: linear-gradient(rgba(86, 170, 168, 1) 0%, rgba(133, 183, 90, 1) 100%);
+}
+
+h3 {
+    color: white;
+}
+
+.form-text {
+    color: white;
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-input-wrapper i {
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: grey;
+}
