@@ -8,7 +8,7 @@ import json
 
 from utils import Category, create_categories, create_paragraph
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", 'sk')
 openai = OpenAI(api_key=OPENAI_API_KEY)
 
 
@@ -65,6 +65,7 @@ read_and_save_json("questions", lang=LANG)
 read_and_save_json("categories", lang=LANG)
 read_and_save_json("examples", lang=LANG)
 read_and_save_json("prompts", lang=LANG)
+read_and_save_json("factsheets")
 
 if "question_scores" not in st.session_state or "cat_scores" not in st.session_state:
     st.session_state['question_scores'] = {}
@@ -131,7 +132,13 @@ def show_example(category):
 
 
 def run_category_diagnosis(ask_llm, category):
-    st.markdown(f"### {category.name}")
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        st.markdown(f"### {category.name}")
+    with col2:
+        if category.name in st.session_state['factsheets']:
+            factsheet_url = st.session_state['factsheets'][category.name]
+            st.link_button(st.session_state['prompts']['go_to_factsheet'], factsheet_url, use_container_width=True)
     iter = ask_llm(st.session_state['messages'] + [{"role": "user",
                                                     "content": category.create_category_prompt()}])
     llm_response = st.write_stream(iter)
@@ -149,7 +156,13 @@ def run_category_group(ask_llm, group, categories):
 
 
 def show_category_diagnosis(category, response):
-    st.markdown(f"### {category.name}")
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        st.markdown(f"### {category.name}")
+    with col2:
+        if category.name in st.session_state['factsheets']:
+            factsheet_url = st.session_state['factsheets'][category.name]
+            st.link_button(st.session_state['prompts']['go_to_factsheet'], factsheet_url, use_container_width=True)
     st.markdown(response)
 
 
